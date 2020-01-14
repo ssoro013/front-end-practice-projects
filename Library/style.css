@@ -1,0 +1,11 @@
+/* .class */
+/* #id */
+table {
+    table-layout: fixed;
+    width: 75%;
+    text-align: left;
+}
+
+td {
+    width: 25%;
+}
