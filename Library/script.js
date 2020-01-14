@@ -34,10 +34,12 @@ var render = function(books) {
     }
 };
 
+//hideForm: function to hide the add form
 var hideForm = function() {
 
 };
 
+//showForm: function to show the add form when "add" button is cliked
 var showForm = function() {
 
 };
