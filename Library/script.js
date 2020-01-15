@@ -1,6 +1,9 @@
 //library: array of books
 var library = [];
 
+//table containing books
+var table = document.getElementById("library");
+
 //create book class
 function Book(title, author, pages, read) {
     this.title = title;
@@ -17,10 +20,9 @@ var addBook = function(title, author, pages, read) {
 //render: function to add books to the table that gets rendered
 var render = function(books) {
     hideForm();
-    var table = document.getElementById("library");
     var children  = table.childNodes;
     var count = children[1].rows.length;
-    for (var i = 0; i < books.length; i++) {
+    for (var i = books.length - 1; i >= 0; i--) {
         var row = table.insertRow(count);
         
         var cell1 = row.insertCell(0);
@@ -28,12 +30,13 @@ var render = function(books) {
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
 
-        cell1.innerHTML = library[i].title;
-        cell2.innerHTML = library[i].author;
-        cell3.innerHTML = library[i].pages;
-        cell4.innerHTML = library[i].read;
+        cell1.innerHTML = books[i].title;
+        cell2.innerHTML = books[i].author;
+        cell3.innerHTML = books[i].pages;
+        cell4.innerHTML = books[i].read;
     }
 };
+
 
 //hideForm: function to hide the add form
 var hideForm = function() {
@@ -47,11 +50,26 @@ var showForm = function() {
     element.style.display = "block";
 };
 
-addBook("Being Mortal", "Atul Gawande", 304, "No")
-addBook("When Breath Becomes Air", "Paul Kalanithi", 256, "No")
-render(library);
-
-var element = document.getElementById("add1");
-element.addEventListener("click", function() {
+//show form on click
+var button1 = document.getElementById("add1");
+button1.addEventListener("click", function() {
     showForm();
 });
+
+//add new book using form inputs
+var button2 = document.getElementById("add2");
+button2.addEventListener("click", function(event) {
+    var title = document.getElementById("title").value;
+    var author = document.getElementById("author").value;
+    var pages = document.getElementById("pages").value;
+    var read = document.getElementById("read").value;
+    addBook(title, author, pages, read);
+    var book = library.slice(library.length - 1);
+    render(book);
+    event.preventDefault();
+    hideForm();
+})
+
+addBook("Being Mortal", "Atul Gawande", 304, "No");
+addBook("When Breath Becomes Air", "Paul Kalanithi", 256, "No");
+render(library);

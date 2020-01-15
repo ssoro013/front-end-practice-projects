@@ -9,3 +9,8 @@ table {
 td {
     width: 25%;
 }
+
+form {
+    width: 75%;
+    margin-top: 50px;
+}
