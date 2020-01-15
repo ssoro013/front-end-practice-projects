@@ -67,8 +67,17 @@ button2.addEventListener("click", function(event) {
     var book = library.slice(library.length - 1);
     render(book);
     event.preventDefault();
+    clearForm();
     hideForm();
-})
+});
+
+//clear form inputs
+var clearForm = function() {
+    var title = document.getElementById("title").value = "";
+    var author = document.getElementById("author").value = "";
+    var pages = document.getElementById("pages").value = "";
+    var read = document.getElementById("read").value = "";
+}
 
 addBook("Being Mortal", "Atul Gawande", 304, "No");
 addBook("When Breath Becomes Air", "Paul Kalanithi", 256, "No");
