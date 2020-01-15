@@ -16,6 +16,7 @@ var addBook = function(title, author, pages, read) {
 
 //render: function to add books to the table that gets rendered
 var render = function(books) {
+    hideForm();
     var table = document.getElementById("library");
     var children  = table.childNodes;
     var count = children[1].rows.length;
@@ -36,14 +37,21 @@ var render = function(books) {
 
 //hideForm: function to hide the add form
 var hideForm = function() {
-
+    var element = document.getElementById("form");
+    element.style.display = "none";
 };
 
 //showForm: function to show the add form when "add" button is cliked
 var showForm = function() {
-
+    var element = document.getElementById("form");
+    element.style.display = "block";
 };
 
 addBook("Being Mortal", "Atul Gawande", 304, "No")
 addBook("When Breath Becomes Air", "Paul Kalanithi", 256, "No")
-render(library)
+render(library);
+
+var element = document.getElementById("add1");
+element.addEventListener("click", function() {
+    showForm();
+});
