@@ -10,6 +10,7 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.remove = "Remove"
 };
 
 //addBook: function to add new book to the library
@@ -29,14 +30,23 @@ var render = function(books) {
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+
+        var title = books[i].title;
 
         cell1.innerHTML = books[i].title;
         cell2.innerHTML = books[i].author;
         cell3.innerHTML = books[i].pages;
         cell4.innerHTML = books[i].read;
+        var remove = document.createElement("button");
+        remove.addEventListener("click", function() {
+            alert(`You are about to remove ${title}?`);
+            table.deleteRow(i);
+        })
+        remove.innerHTML = "Remove";
+        cell5.appendChild(remove);
     }
 };
-
 
 //hideForm: function to hide the add form
 var hideForm = function() {
@@ -56,7 +66,7 @@ button1.addEventListener("click", function() {
     showForm();
 });
 
-//add new book using form inputs
+//add new book using form inputs on second button click
 var button2 = document.getElementById("add2");
 button2.addEventListener("click", function(event) {
     var title = document.getElementById("title").value;
