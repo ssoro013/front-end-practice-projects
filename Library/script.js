@@ -32,16 +32,20 @@ var render = function(books) {
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
 
-        var title = books[i].title;
+        var read = document.createElement("select");
+        var option1 = new Option('Yes');
+        var option2 = new Option('No');
+        read.appendChild(option1);
+        read.appendChild(option2);
 
         cell1.innerHTML = books[i].title;
         cell2.innerHTML = books[i].author;
         cell3.innerHTML = books[i].pages;
-        cell4.innerHTML = books[i].read;
+        cell4.appendChild(read);
         var remove = document.createElement("button");
         remove.addEventListener("click", function() {
-            alert(`You are about to remove ${title}?`);
-            table.deleteRow(i);
+            books.splice(i + 1, 1);
+            table.deleteRow(row.rowIndex);
         })
         remove.innerHTML = "Remove";
         cell5.appendChild(remove);
