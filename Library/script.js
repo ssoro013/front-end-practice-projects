@@ -76,41 +76,48 @@ button1.addEventListener("click", function() {
 //add new book using form inputs on second button click
 var button2 = document.getElementById("add2");
 button2.addEventListener("click", function(event) {
-    var title = document.getElementById("title").value;
-    var author = document.getElementById("author").value;
-    var pages = document.getElementById("pages").value;
-    var read = document.getElementById("read").value;
-    if (validation(title, author, pages)) {
-        addBook(title, author, pages, read);
+    var title = document.getElementById("title");
+    var author = document.getElementById("author");
+    var pages = document.getElementById("pages");
+    var read = document.getElementById("read");
+    if (validation(title, author, pages, read)) {
+        addBook(title.value, author.value, pages.value, read);
         var book = library.slice(library.length - 1);
         render(book);
         event.preventDefault();
         clearForm();
         hideForm();
+    } else {
+        showForm();
+        event.preventDefault();
     }
 });
 
 //clear form inputs
 var clearForm = function() {
-    var title = document.getElementById("title").value = "";
-    var author = document.getElementById("author").value = "";
-    var pages = document.getElementById("pages").value = "";
-    var read = document.getElementById("read").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("pages").value = "";
+    document.getElementById("read").value = "";
 }
 
 //validation of form inputs
 var validation = function(title, author, pages, read) {
     var validation = true;
-    if (title === "" || title === null) {
-        alert("Invalid book title");
+    if (title.value === "" || title.value === null) {
+        title.style.border = "solid 1px red";
         validation = false;
     }
-    if (author === "" || author === null || typeof author !== "string") {
-        alert("Invalid author name");
+    if (author.value === "" || author.value === null || typeof author.value !== "string") {
+        author.style.border = "solid 1px red";
         validation = false;
     }
-    if (pages === "" || pages === null || pages <= 0 || isNaN(pages)) {
-        alert("Invalid page count");
+    if (pages.value === "" || pages.value === null || Number(pages.value) <= 0 || isNaN(pages.value)) {
+        pages.style.border = "solid 1px red";
+        validation = false;
+    }
+    if (read.value === "" || read.value === null & (read.value !== "Yes" || read.value !== "No")) {
+        read.style.border = "solid 1px red";
         validation = false;
     }
 
