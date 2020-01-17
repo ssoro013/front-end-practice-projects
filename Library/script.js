@@ -4,7 +4,7 @@ var library = [];
 //table containing books
 var table = document.getElementById("library");
 
-//create book class
+//book class
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -32,6 +32,7 @@ var render = function(books) {
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
 
+        //read(yes/no) dropdown list
         var read = document.createElement("select");
         var option1 = new Option('Yes');
         var option2 = new Option('No');
@@ -43,6 +44,8 @@ var render = function(books) {
         cell3.innerHTML = books[i].pages;
         cell4.appendChild(read);
         var remove = document.createElement("button");
+
+        //remove event listener
         remove.addEventListener("click", function() {
             books.splice(i + 1, 1);
             table.deleteRow(row.rowIndex);
@@ -77,12 +80,14 @@ button2.addEventListener("click", function(event) {
     var author = document.getElementById("author").value;
     var pages = document.getElementById("pages").value;
     var read = document.getElementById("read").value;
-    addBook(title, author, pages, read);
-    var book = library.slice(library.length - 1);
-    render(book);
-    event.preventDefault();
-    clearForm();
-    hideForm();
+    if (validation(title, author, pages)) {
+        addBook(title, author, pages, read);
+        var book = library.slice(library.length - 1);
+        render(book);
+        event.preventDefault();
+        clearForm();
+        hideForm();
+    }
 });
 
 //clear form inputs
@@ -91,6 +96,25 @@ var clearForm = function() {
     var author = document.getElementById("author").value = "";
     var pages = document.getElementById("pages").value = "";
     var read = document.getElementById("read").value = "";
+}
+
+//validation of form inputs
+var validation = function(title, author, pages, read) {
+    var validation = true;
+    if (title === "" || title === null) {
+        alert("Invalid book title");
+        validation = false;
+    }
+    if (author === "" || author === null || typeof author !== "string") {
+        alert("Invalid author name");
+        validation = false;
+    }
+    if (pages === "" || pages === null || pages <= 0 || isNaN(pages)) {
+        alert("Invalid page count");
+        validation = false;
+    }
+
+    return validation;
 }
 
 addBook("Being Mortal", "Atul Gawande", 304, "No");
