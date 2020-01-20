@@ -3,7 +3,7 @@ body, html {
     margin: 0px;
     text-decoration: center;
     text-align: center;
-    background-color: lightgray;
+    background-color: whitesmoke;
 }
 
 header {
@@ -20,7 +20,7 @@ table {
 th, td {
     width: 30px;
     height: 30px;
-    border: 2px dashed white;
+    border: 5px dashed darkcyan;
     font-size: 25px;
     color: dimgray;
     font-weight: 300;
