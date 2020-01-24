@@ -10,6 +10,18 @@ var current = "X";
 
 //play counts
 
+//restart game
+var table = document.getElementById("table");
+var restart = function() {
+    for(var i = 0; i < 3; i++) {
+        for(var j = 0; j < 3; j++) {
+            var element = table.rows[i].cells[j];
+            element.innerText = '';
+            matrix[i][j] = '';
+        }
+    }
+};
+
 //winner function: determines if there is a winner in the game
 var winner = function(matrix) {
     var outcome1 = matrix[0].join("");
@@ -20,41 +32,35 @@ var winner = function(matrix) {
     var outcome6 = [matrix[0][2], matrix[1][2], matrix[2][2]].join("");
     var outcome7 = [matrix[0][0], matrix[1][1], matrix[2][2]].join("");
     var outcome8 = [matrix[0][2], matrix[1][1], matrix[2][0]].join("");
-    if (outcome1 === "XXX" || outcome2 === "XXX" ||outcome3 === "XXX" || outcome4 === "XXX" || outcome5 === "XXX" || outcome6 === "XXX" || outcome7 === "XXX" || outcome8 === "XXX") {
-        return "X";
+    if(outcome1 === "XXX" || outcome2 === "XXX" ||outcome3 === "XXX" || outcome4 === "XXX" || outcome5 === "XXX" || outcome6 === "XXX" || outcome7 === "XXX" || outcome8 === "XXX") {
+        return 'X';
     }
-    if (outcome1 === "OOO" || outcome2 === "OOO" ||outcome3 === "OOO" || outcome4 === "OOO" || outcome5 === "OOO" || outcome6 === "OOO" || outcome7 === "OOO" || outcome8 === "OOO") {
-        return "O";
+    if(outcome1 === "OOO" || outcome2 === "OOO" ||outcome3 === "OOO" || outcome4 === "OOO" || outcome5 === "OOO" || outcome6 === "OOO" || outcome7 === "OOO" || outcome8 === "OOO") {
+        return 'O';
     }
 };
 
-//restart game
-var restart = function() {
-    var table = document.getElementById('table');
-    for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < 3; j++) {
-            var element = table.rows[i].cells[j];
-            element.innerText = '';
-        }
-    }
-};
 
 //add event listeners to table cells
 $('.cell').on('click', function(event) {
     var row = $(this).closest('tr').index();
     var col = $(this).closest('td').index();
-    if (this.innerText === '') {
+    if(this.innerText === '') {
         this.innerText = current;
         matrix[row][col] = current;
         current = current === "X" ? "O" : "X";
-        count ++;
-        if (winner(matrix)) {
-            var outcome = winner(matrix);
-            outcome === "X" ? score1 ++ : score2 ++;
-            element1.innerHTML = `Player 1: ${score1}`;
-            element2.innerHTML = `Player 2: ${score2}`;
-            restart();
+    }
+    var outcome = winner(matrix);
+    if(winner(matrix)) {
+        if(outcome === 'X') {
+            score1 ++; 
         }
+        if(outcome === 'O') {
+            score2 ++;
+        }
+        element1.innerHTML = `Player 1: ${score1}`;
+        element2.innerHTML = `Player 2: ${score2}`;
+        restart();
     }
 });
 
