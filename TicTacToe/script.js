@@ -9,6 +9,7 @@ var score2 = 0;
 var current = "X";
 
 //play counts
+var count = 0;
 
 //restart game
 var table = document.getElementById("table");
@@ -49,6 +50,7 @@ $('.cell').on('click', function(event) {
         this.innerText = current;
         matrix[row][col] = current;
         current = current === "X" ? "O" : "X";
+        count ++;
     }
     var outcome = winner(matrix);
     if(winner(matrix)) {
@@ -61,6 +63,11 @@ $('.cell').on('click', function(event) {
         element1.innerHTML = `Player 1: ${score1}`;
         element2.innerHTML = `Player 2: ${score2}`;
         restart();
+        count = 0;
+    }
+    if(count === 9) {
+        restart();
+        count = 0;
     }
 });
 
@@ -70,7 +77,6 @@ element1.textContent = `Player 1: ${score1}`;
 
 var element2 = document.getElementById("player2");
 element2.textContent = `Player 2: ${score2}`;
-
 
 // var sound = new Audio()
 // sound.play()
