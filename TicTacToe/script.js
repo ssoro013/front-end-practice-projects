@@ -73,10 +73,13 @@ $('.cell').on('click', function(event) {
 
 //score trackers
 var element1 = document.getElementById("player1");
-element1.textContent = `Player 1: ${score1}`;
+element1.innerHTML = `Player 1: ${score1}`;
 
 var element2 = document.getElementById("player2");
-element2.textContent = `Player 2: ${score2}`;
+element2.innerHTML = `Player 2: ${score2}`;
+
+// var currentWinner = document.getElementById("winner");
+// currentWinner.innerHTML = `Current Winner: ${score1 > score2 ? "X" : "O"}`
 
 // var sound = new Audio()
 // sound.play()
